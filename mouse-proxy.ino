@@ -1,6 +1,9 @@
+#include <HID-Project.h>
+#include <HID-Settings.h>
+
 #include "hidboot.h"
 #include "usbhub.h"
-#include <Mouse.h>
+// #include <Mouse.h>
 
 // Satisfy the IDE, which needs to see the include statment in the ino too.
 #ifdef dobogusinclude
@@ -8,7 +11,8 @@
 #include <SPI.h>
 #endif
 
-#define __SERIAL
+// Uncomment for debug to Serial.
+//#define __SERIAL
 
 const uint8_t multiplier = 3;
 
@@ -106,7 +110,7 @@ void setup()
    Serial.println("Start");
    Serial.println(MOUSE_LEFT);
    Serial.println(MOUSE_RIGHT);
-   Serial.println(MOUSE_MIDDLE);
+   Serial.println(MOUSE_PREV);
 #endif   
 
     if (Usb.Init() == -1) {
