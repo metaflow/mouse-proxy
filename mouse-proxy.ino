@@ -16,12 +16,9 @@
 
 const uint8_t multiplier = 3;
 
-class MouseRptParser : public MouseReportParser
-{
+class MouseRptParser : public MouseReportParser {
 public:
-  MouseRptParser() : changeSensetivity(false) {
-    
-  }
+  MouseRptParser() : changeSensetivity(false) {}
 protected:
   void OnMouseMove  (MOUSEINFO *mi);
   void Debug(bool is_rpt_id, uint8_t len, uint8_t *buf) override;
@@ -42,17 +39,7 @@ void MouseRptParser::OnMouseMove(MOUSEINFO *mi)
 #endif
   if (changeSensetivity) {
     dx *= multiplier;    
-//    if (dx < 0) {      
-//      if (mi->dX < dx) dx = -128;      
-//    } else {      
-//      if (mi->dX > dx) dx = 127;      
-//    }
     dy *= multiplier;
-//    if (dy < 0) {
-//      if (mi->dY < dy) dy = -128;      
-//    } else {      
-//      if (mi->dY > dy) dy = 127;
-//    }    
   }    
   Mouse.move(dx, dy, mi->wheel);
 };
@@ -62,8 +49,8 @@ void MouseRptParser::OnButtonDown(uint8_t button) {
     changeSensetivity = true;
     return;
   }
-  Serial.print("D ");
-  Serial.println(button);
+  //Serial.print("D ");
+  //Serial.println(button);
   Mouse.press(button);
 };
 
@@ -72,8 +59,8 @@ void MouseRptParser::OnButtonUp(uint8_t button) {
     changeSensetivity = false;
     return;
   }
-  Serial.print("U ");
-  Serial.println(button);
+  //Serial.print("U ");
+  //Serial.println(button);
   Mouse.release(button);
 };
 
@@ -92,11 +79,11 @@ void MouseRptParser::Debug(bool is_rpt_id, uint8_t len, uint8_t *buf) {
   Serial.println();
 };
 
-USB     Usb;
-USBHub     Hub(&Usb);
-HIDBoot<USB_HID_PROTOCOL_MOUSE>    HidMouse(&Usb, true);
+USB Usb;
+USBHub Hub(&Usb);
+HIDBoot<USB_HID_PROTOCOL_MOUSE> HidMouse(&Usb, true);
 uint32_t next_time;
-MouseRptParser                               Prs;
+MouseRptParser Prs;
 
 void setup()
 {
@@ -125,7 +112,7 @@ void setup()
 void loop()
 {
   Usb.Task();
-//  Mouse.move(1,1,0);
+  //Mouse.move(1,1,0);
 //  delay(100);
 }
 
